@@ -1,0 +1,4 @@
+https://github.com/robinhad/kruk - About Ukrainian instruction-tuned language models and datasets
+
+https://raw.githubusercontent.com/robinhad/kruk/refs/heads/main/data/cc-by-nc/alpaca_data_translated.json
+Remove `input` from alpaca_data_translated.json. Use `instruction` as prompt

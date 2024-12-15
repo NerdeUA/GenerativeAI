@@ -1,0 +1,10 @@
+transformers
+pandas
+numpy
+torch
+ollama
+datasets
+accelerate
+sentencepiece
+torchvision
+torchaudio
