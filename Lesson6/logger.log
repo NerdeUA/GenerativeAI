@@ -1,0 +1,70 @@
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.2.0 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "Lesson6\main.py", line 1, in <module>
+    from transformers import T5Tokenizer, T5ForConditionalGeneration
+  File ".venv\lib\site-packages\transformers\utils\import_utils.py", line 1782, in __getattr__
+    value = getattr(module, name)
+  File ".venv\lib\site-packages\transformers\utils\import_utils.py", line 1781, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+  File ".venv\lib\site-packages\transformers\utils\import_utils.py", line 1793, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+  File "Python310\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File ".venv\lib\site-packages\transformers\models\t5\modeling_t5.py", line 28, in <module>
+    from ...cache_utils import Cache, DynamicCache, EncoderDecoderCache, StaticCache
+  File ".venv\lib\site-packages\transformers\cache_utils.py", line 1872, in <module>
+    class OffloadedStaticCache(StaticCache):
+  File ".venv\lib\site-packages\transformers\cache_utils.py", line 1940, in OffloadedStaticCache
+    offload_device: Union[str, torch.device] = torch.device("cpu"),
+.venv\lib\site-packages\transformers\cache_utils.py:1940: UserWarning: Failed to initialize NumPy: _ARRAY_API not found (Triggered internally at ..\torch\csrc\utils\tensor_numpy.cpp:84.) 
+  offload_device: Union[str, torch.device] = torch.device("cpu"),
+True
+1
+NVIDIA GeForce GTX 1070 Ti
+You are using the default legacy behaviour of the <class 'transformers.models.t5.tokenization_t5.T5Tokenizer'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 41601/41601 [00:23<00:00, 1736.78 examples/s]
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10401/10401 [00:05<00:00, 1767.48 examples/s] 
+main.py:41: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+  0%|                                                                                                                                                                                         | 0/15603 [00:00<?, ?it/s]Passing a tuple of `past_key_values` is deprecated and will be removed in Transformers v4.48.0. You should pass an instance of `EncoderDecoderCache` instead, e.g. `past_key_values=EncoderDecoderCache.from_legacy_cache(past_key_values)`.
+{'loss': 1.2731, 'grad_norm': 0.18266186118125916, 'learning_rate': 4.839774402358521e-05, 'epoch': 0.1}
+{'loss': 0.8983, 'grad_norm': 0.2673741281032562, 'learning_rate': 4.6795488047170414e-05, 'epoch': 0.19}                                                                                                                
+{'loss': 0.8668, 'grad_norm': 0.2793697416782379, 'learning_rate': 4.5193232070755624e-05, 'epoch': 0.29}                                                                                                                
+{'loss': 0.8619, 'grad_norm': 0.27499231696128845, 'learning_rate': 4.359097609434083e-05, 'epoch': 0.38}                                                                                                                
+{'loss': 0.8502, 'grad_norm': 0.189912810921669, 'learning_rate': 4.198872011792604e-05, 'epoch': 0.48}                                                                                                                  
+{'loss': 0.8486, 'grad_norm': 0.17739246785640717, 'learning_rate': 4.038646414151125e-05, 'epoch': 0.58}                                                                                                                
+{'loss': 0.8198, 'grad_norm': 0.42179128527641296, 'learning_rate': 3.878420816509646e-05, 'epoch': 0.67}                                                                                                                
+{'loss': 0.8154, 'grad_norm': 0.21710039675235748, 'learning_rate': 3.718195218868167e-05, 'epoch': 0.77}                                                                                                                
+{'loss': 0.8086, 'grad_norm': 0.2618688941001892, 'learning_rate': 3.557969621226687e-05, 'epoch': 0.87}                                                                                                                 
+{'loss': 0.8093, 'grad_norm': 0.2495303750038147, 'learning_rate': 3.397744023585208e-05, 'epoch': 0.96}                                                                                                                 
+{'loss': 0.7801, 'grad_norm': 0.5372224450111389, 'learning_rate': 3.237518425943729e-05, 'epoch': 1.06}                                                                                                                 
+{'loss': 0.7779, 'grad_norm': 0.18091335892677307, 'learning_rate': 3.0772928283022495e-05, 'epoch': 1.15}                                                                                                               
+{'loss': 0.7837, 'grad_norm': 0.3093326985836029, 'learning_rate': 2.9170672306607704e-05, 'epoch': 1.25}                                                                                                                
+{'loss': 0.8076, 'grad_norm': 0.2479301393032074, 'learning_rate': 2.7568416330192913e-05, 'epoch': 1.35}                                                                                                                
+{'loss': 0.7676, 'grad_norm': 0.2958183288574219, 'learning_rate': 2.596616035377812e-05, 'epoch': 1.44}                                                                                                                 
+{'loss': 0.7779, 'grad_norm': 0.210985466837883, 'learning_rate': 2.436390437736333e-05, 'epoch': 1.54}                                                                                                                  
+{'loss': 0.7641, 'grad_norm': 0.1470605731010437, 'learning_rate': 2.2761648400948538e-05, 'epoch': 1.63}                                                                                                                
+{'loss': 0.7495, 'grad_norm': 0.19293157756328583, 'learning_rate': 2.1159392424533744e-05, 'epoch': 1.73}                                                                                                               
+{'loss': 0.7679, 'grad_norm': 0.3391481339931488, 'learning_rate': 1.955713644811895e-05, 'epoch': 1.83}                                                                                                                 
+{'loss': 0.7441, 'grad_norm': 0.2729751169681549, 'learning_rate': 1.795488047170416e-05, 'epoch': 1.92}                                                                                                                 
+{'loss': 0.7528, 'grad_norm': 0.3055749833583832, 'learning_rate': 1.635262449528937e-05, 'epoch': 2.02}                                                                                                                 
+{'loss': 0.7567, 'grad_norm': 0.7806865572929382, 'learning_rate': 1.4750368518874577e-05, 'epoch': 2.11}                                                                                                                
+{'loss': 0.7436, 'grad_norm': 0.30123504996299744, 'learning_rate': 1.3148112542459784e-05, 'epoch': 2.21}                                                                                                               
+{'loss': 0.7549, 'grad_norm': 0.2407953292131424, 'learning_rate': 1.1545856566044992e-05, 'epoch': 2.31}                                                                                                                
+{'loss': 0.7585, 'grad_norm': 0.23938795924186707, 'learning_rate': 9.9436005896302e-06, 'epoch': 2.4}                                                                                                                   
+{'loss': 0.7412, 'grad_norm': 0.36231380701065063, 'learning_rate': 8.341344613215407e-06, 'epoch': 2.5}                                                                                                                 
+{'loss': 0.7383, 'grad_norm': 0.32923340797424316, 'learning_rate': 6.739088636800615e-06, 'epoch': 2.6}                                                                                                                 
+{'loss': 0.7364, 'grad_norm': 0.274241179227829, 'learning_rate': 5.1368326603858235e-06, 'epoch': 2.69}                                                                                                                 
+{'loss': 0.7669, 'grad_norm': 0.2868015766143799, 'learning_rate': 3.534576683971031e-06, 'epoch': 2.79}                                                                                                                 
+{'loss': 0.7433, 'grad_norm': 0.3108953833580017, 'learning_rate': 1.9323207075562393e-06, 'epoch': 2.88}                                                                                                                
+{'loss': 0.7518, 'grad_norm': 0.17851009964942932, 'learning_rate': 3.300647311414472e-07, 'epoch': 2.98}                                                                                                                
+{'train_runtime': 16789.6563, 'train_samples_per_second': 7.433, 'train_steps_per_second': 0.929, 'train_loss': 0.8001172565034068, 'epoch': 3.0}                                                                        
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15603/15603 [4:39:49<00:00,  1.08s/it] 
